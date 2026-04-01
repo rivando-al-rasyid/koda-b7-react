@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Button from './components/Button'
-
+import ProductForm from './components/Form'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,9 +14,19 @@ function App() {
 
   return (
     <>
-      <Button name="Tambah" onClick={increment} />
-      <p className="mt-4 text-lg font-medium">You clicked {count} times</p>
-      <Button name="Kurang" onClick={decrement} />
+    <main className="grid min-h-screen place-items-center bg-gray-100">
+        <section className="flex flex-col items-center gap-4 rounded-lg bg-white p-8 shadow-lg">
+        <h1 className='text-2xl font-bold'>Counter App</h1>
+        <div className='flex flex-row items-center gap-4'>
+        <Button color="bg-red-500 hover:bg-red-600 text-white" name="Kurang" onClick={decrement} />
+        <p className="mt-4 text-lg font-medium">You clicked {count} times</p>
+        <Button color="bg-green-500 hover:bg-green-600 text-white" name="Tambah" onClick={increment} />
+        </div>
+    </section>
+    <section className="mt-12 w-full max-w-md">
+      <ProductForm />
+    </section>
+    </main>
     </>
   )
 }
