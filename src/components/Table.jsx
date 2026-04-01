@@ -1,8 +1,21 @@
+
 export default function ProductTable({ products }) {
-  return (
-    <section className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
-      <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
-        <h2 className="text-xl font-black tracking-tight text-white uppercase">
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return date.toLocaleString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+
+        });
+    };
+
+    return (
+        <section className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
+            <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
+                <h2 className="text-xl font-black tracking-tight text-white uppercase">
           📦 Product List
         </h2>
       </div>
@@ -19,12 +32,16 @@ export default function ProductTable({ products }) {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-amber-400 text-zinc-900">
-                <th className="text-left px-6 py-3 font-black uppercase tracking-widest w-10">
-                  #
+                <th className="text-left px-3 py-3 font-black uppercase tracking-widest w-10">
+                  No
                 </th>
-                <th className="text-left px-6 py-3 font-black uppercase tracking-widest">
+                <th className="text-left px-3 py-3 font-black uppercase tracking-widest">
                   Product Name
                 </th>
+                <th className="text-left px-3 py-3 font-black uppercase tracking-widest">
+                  Create At
+                </th>
+
               </tr>
             </thead>
             <tbody>
@@ -34,11 +51,14 @@ export default function ProductTable({ products }) {
                   className={`border-t-2 border-zinc-100 hover:bg-amber-50 transition-colors
                     ${index % 2 === 0 ? "bg-white" : "bg-zinc-50"}`}
                 >
-                  <td className="px-6 py-3 font-black text-zinc-300">
+                  <td className="px-3 py-3 font-black text-zinc-300">
                     {String(index + 1).padStart(2, "0")}
                   </td>
-                  <td className="px-6 py-3 font-semibold text-zinc-800">
+                  <td className="px-3 py-3 font-semibold text-zinc-800">
                     {p.productName}
+                  </td>
+                  <td className="px-3 py-3 text-zinc-500">
+                    {formatDate(p.id)}
                   </td>
                 </tr>
               ))}
