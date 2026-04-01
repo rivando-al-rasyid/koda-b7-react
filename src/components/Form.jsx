@@ -19,9 +19,9 @@ export default function ProductForm({ onAddProduct }) {
         ＋ Add Product
       </h2>
 
-      <div className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
+          <label  className="text-xs font-bold uppercase tracking-widest text-zinc-500">
             Product Name
           </label>
           <input
@@ -35,12 +35,11 @@ export default function ProductForm({ onAddProduct }) {
 
 
         <button
-          onClick={handleSubmit}
           className="mt-1 bg-zinc-900 text-white font-black uppercase tracking-widest text-sm py-3 rounded-xl hover:bg-amber-400 hover:text-zinc-900 active:scale-95 transition-all duration-150"
         >
           Submit
         </button>
-      </div>
+      </form>
     </section>
   )
 }

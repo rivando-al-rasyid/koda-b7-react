@@ -9,12 +9,14 @@ function App() {
 
   const increment = () => { if (count < 10) setCount(count + 1) }
   const decrement = () => { if (count > 0) setCount(count - 1) }
+
 const handleAddProduct = (product) => {
-  setProducts(products.concat(product));
+    if (product.productName === "") return
+    setProducts(products.concat(product));
 }
 
   return (
-    <main className="mx-auto max-w-md flex flex-col gap-6 min-h-screen bg-zinc-100 px-4 py-12">
+    <main className="mx-auto max-w-md flex flex-col gap-6 min-h-screen px-4 py-12">
 
         <section className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
           <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
