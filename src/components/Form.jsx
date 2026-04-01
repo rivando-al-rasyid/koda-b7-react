@@ -14,7 +14,7 @@ export default function ProductForm({ onAddProduct }) {
   }
 
   return (
-    <div className="bg-white border-2 border-zinc-900 rounded-2xl p-6 shadow-[4px_4px_0px_#18181b] w-full">
+    <section className="bg-white border-2 border-zinc-900 rounded-2xl p-6 shadow-[4px_4px_0px_#18181b] w-full">
       <h2 className="text-xl font-black tracking-tight text-zinc-900 mb-5 uppercase">
         ＋ Add Product
       </h2>
@@ -41,6 +41,6 @@ export default function ProductForm({ onAddProduct }) {
           Submit
         </button>
       </div>
-    </div>
+    </section>
   )
 }
