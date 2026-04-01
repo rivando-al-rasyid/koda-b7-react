@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import Button from './components/Button'
 import ProductForm from './components/Form'
-
+import ProductTable from './components/Table'
 function App() {
   const [count, setCount] = useState(0)
+  const [products, setProducts] = useState([])
 
   const increment = () => {
     if (count < 10) setCount(count + 1)
@@ -11,6 +12,9 @@ function App() {
   const decrement = () => {
     if (count > 0) setCount(count - 1)
   }
+const handleAddProduct = (product) => {
+  setProducts([...products, product])
+}
 
   return (
     <>
@@ -24,8 +28,12 @@ function App() {
         </div>
     </section>
     <section className="mt-12 w-full max-w-md">
-      <ProductForm />
+      <ProductForm onAddProduct={handleAddProduct} />
     </section>
+    <section className="mt-12 w-full max-w-md">
+      <ProductTable products={products} />
+    </section>
+
     </main>
     </>
   )
