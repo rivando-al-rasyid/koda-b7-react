@@ -77,7 +77,7 @@ export default function Pokemon({ pokemons = [] }) {
                     <input
                         type="text"
                         placeholder="Type to search Pokemon..."
-                        className="w-full border-[3px] border-zinc-900 rounded-xl px-4 py-3 text-lg font-bold text-zinc-800 placeholder-zinc-300 focus:outline-none shadow-[4px_4px_0px_#000] transition-transform active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                        className="w-full border-[3px] border-zinc-900 rounded-xl px-4 py-3 text-lg font-bold text-zinc-800 placeholder-zinc-300 focus:outline-none shadow-[4px_4px_0px_#000] transition-transform active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                         value={findPokemon}
                         onChange={(e) => setFindPokemon(e.target.value)}
                     />
