@@ -4,7 +4,11 @@ import ReviewList from "./components/ReviewList";
 
 function App() {
     const [reviews, setReviews] = useState([]);
-
+    /**
+     *
+     * @param {Object} newReview
+     * @returns
+     */
     const handleAddReview = (newReview) => {
         if (!newReview.comment || !newReview.username) return;
         const reviewWithMeta = {

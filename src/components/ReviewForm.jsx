@@ -68,7 +68,7 @@ const ReviewForm = ({ onAddReview }) => {
                 </label>
                 <textarea
                     required
-                    rows="3"
+                    rows={3}
                     className="border-2 border-zinc-900 p-3 rounded-xl focus:bg-yellow-50 outline-none transition-colors"
                     placeholder="What did you think about the product?"
                     value={formData.comment}
@@ -80,7 +80,7 @@ const ReviewForm = ({ onAddReview }) => {
 
             <button
                 type="submit"
-                className="bg-indigo-600 text-white font-black py-4 px-8 rounded-xl border-2 border-zinc-900 shadow-[4px_4px_0px_#000] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all uppercase tracking-widest"
+                className="bg-indigo-600 text-white font-black py-4 px-8 rounded-xl border-2 border-zinc-900 shadow-[4px_4px_0px_#000] hover:shadow-none hover:translate-x-0.75 hover:translate-y-0.75 transition-all uppercase tracking-widest"
             >
                 Post Review
             </button>
