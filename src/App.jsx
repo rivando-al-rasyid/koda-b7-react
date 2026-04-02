@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import ProductForm from "./components/Form";
 import ProductTable from "./components/Table";
+import Pokemon from "./components/PokemonCard";
 
 function App() {
     const [count, setCount] = useState(0);
     const [products, setProducts] = useState([]);
+    const [pokemons, setPokemons] = useState([]);
 
     const increment = () => {
         if (count < 10) setCount(count + 1);
@@ -18,9 +20,22 @@ function App() {
         if (product.productName === "") return;
         setProducts(products.concat(product));
     };
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await fetch(
+                    "https://pokeapi.co/api/v2/pokemon?limit=16",
+                );
+                const data = await response.json();
+                setPokemons(data.results);
+            } catch (error) {
+                console.error("Error fetching Pokemon data:", error);
+            }
+        })();
+    }, []);
 
     return (
-        <main className="mx-auto max-w-md flex flex-col gap-6 min-h-screen px-4 py-12">
+        <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
             <section className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
                 <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
                     <h2 className="text-xl font-black tracking-tight text-white uppercase">
@@ -50,12 +65,21 @@ function App() {
                     </div>
                 </div>
             </section>
+            <section className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
+                <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
+                    <h2 className="text-xl font-black tracking-tight text-white uppercase">
+                        🔢 Counter
+                    </h2>
+                </div>
+                {/* Form */}
+                <ProductForm onAddProduct={handleAddProduct} />
 
-            {/* Form */}
-            <ProductForm onAddProduct={handleAddProduct} />
+                {/* Table */}
+                <ProductTable products={products} />
+            </section>
 
-            {/* Table */}
-            <ProductTable products={products} />
+            {/* Pokemon */}
+            <Pokemon pokemons={pokemons} />
         </main>
     );
 }
