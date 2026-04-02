@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ProductForm({ onAddProduct }) {
+export default function ProductForm({ onAddProduct, Name }) {
     const [productName, setProductName] = useState("");
 
     const handleSubmit = (e) => {
@@ -15,13 +15,13 @@ export default function ProductForm({ onAddProduct }) {
     return (
         <section className="p-6">
             <h2 className="text-xl font-black tracking-tight text-zinc-900 mb-5 uppercase">
-                ＋ Add Product
+                ＋ Add {Name}
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
                     <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
-                        Product Name
+                        {Name} Name
                     </label>
                     <input
                         type="text"

@@ -47,7 +47,9 @@ export default function ProductTable({ products }) {
                                     <tr
                                         key={p.id}
                                         className={`hover:bg-amber-50 transition-colors ${
-                                            index % 2 === 0 ? "bg-white" : "bg-zinc-50"
+                                            index % 2 === 0
+                                                ? "bg-white"
+                                                : "bg-zinc-50"
                                         }`}
                                     >
                                         <td className="px-4 py-4 font-black text-zinc-300">
