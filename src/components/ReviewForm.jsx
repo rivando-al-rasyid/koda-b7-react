@@ -19,13 +19,13 @@ const ReviewForm = ({ onAddReview }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Name Input */}
                 <div className="flex flex-col gap-1">
-                    <label className="font-black uppercase text-xs">
+                    <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
                         Your Name
                     </label>
                     <input
                         type="text"
                         required
-                        className="border-2 border-zinc-900 p-3 rounded-xl focus:bg-yellow-50 outline-none transition-colors"
+                        className="border-2 border-zinc-900 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 placeholder-zinc-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all"
                         placeholder="e.g. Jane Doe"
                         value={formData.username}
                         onChange={(e) =>
@@ -39,11 +39,11 @@ const ReviewForm = ({ onAddReview }) => {
 
                 {/* Rating Select */}
                 <div className="flex flex-col gap-1">
-                    <label className="font-black uppercase text-xs">
+                    <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
                         Rating
                     </label>
                     <select
-                        className="border-2 border-zinc-900 p-3 rounded-xl bg-white outline-none appearance-none"
+                        className="border-2 border-zinc-900 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 bg-white focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all appearance-none"
                         value={formData.rating}
                         onChange={(e) =>
                             setFormData({
@@ -63,13 +63,13 @@ const ReviewForm = ({ onAddReview }) => {
 
             {/* Comment Input */}
             <div className="flex flex-col gap-1">
-                <label className="font-black uppercase text-xs">
+                <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
                     Your Review
                 </label>
                 <textarea
                     required
                     rows={3}
-                    className="border-2 border-zinc-900 p-3 rounded-xl focus:bg-yellow-50 outline-none transition-colors"
+                    className="border-2 border-zinc-900 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 placeholder-zinc-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all"
                     placeholder="What did you think about the product?"
                     value={formData.comment}
                     onChange={(e) =>
@@ -80,7 +80,7 @@ const ReviewForm = ({ onAddReview }) => {
 
             <button
                 type="submit"
-                className="bg-indigo-600 text-white font-black py-4 px-8 rounded-xl border-2 border-zinc-900 shadow-[4px_4px_0px_#000] hover:shadow-none hover:translate-x-0.75 hover:translate-y-0.75 transition-all uppercase tracking-widest"
+                className="mt-1 bg-zinc-900 text-white font-black uppercase tracking-widest text-sm py-3 rounded-xl hover:bg-amber-400 hover:text-zinc-900 active:scale-95 transition-all duration-150"
             >
                 Post Review
             </button>

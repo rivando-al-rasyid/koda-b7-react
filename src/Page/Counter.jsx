@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../components/Button";
-
+import Footer from "../layout/Footer";
 export default function Counter() {
     const [count, setCount] = useState(0);
 
@@ -14,7 +14,8 @@ export default function Counter() {
     return (
         <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
             <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">
-                <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
+                {/* Section Header */}
+                <div className="px-6 py-4 border-b-4 border-zinc-900 bg-zinc-900">
                     <h2 className="text-xl font-black tracking-tight text-white uppercase">
                         🔢 Counter
                     </h2>
@@ -29,16 +30,17 @@ export default function Counter() {
                         <Button
                             color="flex-1 py-4 bg-white border-2 border-zinc-900 text-zinc-900 font-bold hover:translate-y-[-2px] active:translate-y-[2px] transition-transform shadow-[4px_4px_0px_#18181b]"
                             name="− Kurang"
-                            onClick={decrement}
+                            event={decrement}
                         />
                         <Button
                             color="flex-1 py-4 bg-amber-400 border-2 border-zinc-900 text-zinc-900 font-bold hover:translate-y-[-2px] active:translate-y-[2px] transition-transform shadow-[4px_4px_0px_#18181b]"
                             name="+ Tambah"
-                            onClick={increment}
+                            event={increment}
                         />
                     </div>
                 </div>
             </section>
+            <Footer />
         </main>
     );
 }

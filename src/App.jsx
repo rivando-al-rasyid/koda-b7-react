@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReviewForm from "./components/ReviewForm";
 import ReviewList from "./components/ReviewList";
+import Footer from "./layout/Footer";
 
 function App() {
     const [reviews, setReviews] = useState([]);
@@ -37,7 +38,7 @@ function App() {
 
                 {/* Feedback List Area */}
                 <div className="bg-white">
-                    <div className="px-6 py-4 border-b-2 border-zinc-200 bg-zinc-100/50">
+                    <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-100/50">
                         <p className="font-bold text-zinc-900 uppercase text-sm tracking-widest">
                             Recent Activity ({reviews.length})
                         </p>
@@ -45,6 +46,7 @@ function App() {
                     <ReviewList reviews={reviews} />
                 </div>
             </section>
+            <Footer />
         </main>
     );
 }

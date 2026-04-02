@@ -30,9 +30,9 @@ export default function PokemonCard({ pokemons = [] }) {
     );
 
     return (
-        <section className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
+        <section className="bg-white overflow-hidden">
             {/* Header Bar */}
-            <div className="px-4 py-3 border-b-[3px] border-zinc-900 bg-zinc-900 flex items-center gap-3">
+            <div className="px-6 py-4 border-b-4 border-zinc-900 bg-zinc-900 flex items-center gap-3">
                 <svg
                     width="24"
                     height="24"

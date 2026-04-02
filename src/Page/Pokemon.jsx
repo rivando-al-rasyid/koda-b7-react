@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PokemonCard from "../components/PokemonCard";
+import Footer from "../layout/Footer";
 
 export default function Pokemon() {
     const [pokemons, setPokemons] = useState([]);
@@ -28,6 +29,7 @@ export default function Pokemon() {
             <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">
                 <PokemonCard pokemons={pokemons} />
             </section>
+            <Footer />
         </main>
     );
 }
