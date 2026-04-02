@@ -1,2 +1,204 @@
 @import "tailwindcss";
 
+/* ══════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════ */
+:root {
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent: #ff5e5b;
+  --shadow: 8px 8px 0px var(--primary);
+  --shadow-sm: 4px 4px 0px var(--primary);
+  --font-mono: "Courier New", monospace;
+}
+
+/* ══════════════════════════════
+   BASE RESET
+══════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+}
+
+body {
+  background-color: var(--secondary);
+  min-height: 100vh;
+  color: var(--primary);
+}
+
+/* ══════════════════════════════
+   NAVBAR
+══════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+
+.navbar-brand {
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ══════════════════════════════
+   NAV LINKS
+══════════════════════════════ */
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover {
+  color: var(--secondary);
+}
+
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* ══════════════════════════════
+   AVATAR & DROPDOWN
+══════════════════════════════ */
+.avatar-wrapper {
+  position: relative;
+}
+
+.avatar-btn {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--secondary);
+  background: var(--accent);
+  color: var(--secondary);
+  font-weight: 900;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  border-radius: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+}
+
+.avatar-btn:hover {
+  box-shadow: 3px 3px 0 var(--secondary);
+  transform: translate(-1px, -1px);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background: var(--secondary);
+  border: 2px solid var(--primary);
+  box-shadow: var(--shadow);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+.avatar-dropdown.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown-email {
+  padding: 12px 16px;
+  font-size: 0.7rem;
+  color: #666;
+  border-bottom: 2px solid var(--primary);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-mono);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: #f5f5f5;
+}
+
+.dropdown-item.logout {
+  color: var(--accent);
+  border-top: 2px solid var(--primary);
+}
+
+.dropdown-item.logout:hover {
+  background: var(--accent);
+  color: var(--secondary);
+}
+
+/* ══════════════════════════════
+   PAGE LAYOUT
+══════════════════════════════ */
+.page {
+  padding-top: 56px;
+}

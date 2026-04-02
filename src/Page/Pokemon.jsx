@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import PokemonCard from "../components/PokemonCard";
+
 export default function Pokemon() {
     const [pokemons, setPokemons] = useState([]);
+
     useEffect(() => {
         (async () => {
             try {
@@ -23,9 +24,10 @@ export default function Pokemon() {
     }, []);
 
     return (
-        <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
-            {/* Pokemon */}
-            <PokemonCard pokemons={pokemons} />
-        </main>
+        <div className="page">
+            <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
+                <PokemonCard pokemons={pokemons} />
+            </main>
+        </div>
     );
 }

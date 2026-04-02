@@ -11,12 +11,9 @@ export default function ProductTable({ products }) {
     };
 
     return (
-        /* FIX: Added border-2, rounded corners, and a hard shadow.
-           The 'overflow-hidden' ensures the yellow header respects the corner radius.
-        */
         <section className="overflow-hidden px-6 pb-6 bg-white">
             <div>
-                <h2 className="text-xl p-4 font-black tracking-tight  uppercase">
+                <h2 className="text-xl p-4 font-black tracking-tight uppercase">
                     📦 Product List
                 </h2>
             </div>
@@ -41,7 +38,7 @@ export default function ProductTable({ products }) {
                                         Product Name
                                     </th>
                                     <th className="text-left px-4 py-4 font-black uppercase tracking-widest">
-                                        Create At
+                                        Created At
                                     </th>
                                 </tr>
                             </thead>
@@ -49,8 +46,9 @@ export default function ProductTable({ products }) {
                                 {products.map((p, index) => (
                                     <tr
                                         key={p.id}
-                                        className={`hover:bg-amber-50 transition-colors
-                        ${index % 2 === 0 ? "bg-white" : "bg-zinc-50"}`}
+                                        className={`hover:bg-amber-50 transition-colors ${
+                                            index % 2 === 0 ? "bg-white" : "bg-zinc-50"
+                                        }`}
                                     >
                                         <td className="px-4 py-4 font-black text-zinc-300">
                                             {String(index + 1).padStart(2, "0")}

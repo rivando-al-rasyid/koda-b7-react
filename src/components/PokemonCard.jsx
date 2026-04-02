@@ -1,21 +1,17 @@
 import { useState } from "react";
 
-// Mapping of type names to their Scarlet/Violet sprite URLs
 const typePokemon = {
     normal: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/1.png",
     fire: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/10.png",
     water: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/11.png",
-    electric:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/13.png",
+    electric: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/13.png",
     grass: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/12.png",
     ice: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/15.png",
-    fighting:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/2.png",
+    fighting: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/2.png",
     poison: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/4.png",
     ground: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/5.png",
     flying: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/3.png",
-    psychic:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/14.png",
+    psychic: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/14.png",
     bug: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/7.png",
     rock: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/6.png",
     ghost: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/8.png",
@@ -23,11 +19,10 @@ const typePokemon = {
     dark: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/17.png",
     steel: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/9.png",
     fairy: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/18.png",
-    stellar:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/20.png",
+    stellar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/20.png",
 };
 
-export default function Pokemon({ pokemons = [] }) {
+export default function PokemonCard({ pokemons = [] }) {
     const [findPokemon, setFindPokemon] = useState("");
 
     const filteredPokemons = pokemons.filter((pokemon) =>
@@ -45,26 +40,12 @@ export default function Pokemon({ pokemons = [] }) {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                 >
-                    <circle
-                        cx="16"
-                        cy="16"
-                        r="14"
-                        fill="white"
-                        stroke="black"
-                        strokeWidth="2"
-                    />
+                    <circle cx="16" cy="16" r="14" fill="white" stroke="black" strokeWidth="2" />
                     <path
                         d="M2.15 15.5C2.6 8.5 8.5 2.6 15.5 2.15V15.5H2.15ZM29.85 15.5C29.4 8.5 23.5 2.6 16.5 2.15V15.5H29.85Z"
                         fill="#ef4444"
                     />
-                    <circle
-                        cx="16"
-                        cy="16"
-                        r="4"
-                        fill="white"
-                        stroke="black"
-                        strokeWidth="2"
-                    />
+                    <circle cx="16" cy="16" r="4" fill="white" stroke="black" strokeWidth="2" />
                     <circle cx="16" cy="16" r="1.5" fill="black" />
                 </svg>
                 <h2 className="text-xl font-black tracking-widest text-white uppercase italic">
@@ -106,19 +87,14 @@ export default function Pokemon({ pokemons = [] }) {
                                         className="w-full h-full object-contain"
                                     />
                                 </div>
-
                                 <h2 className="text-sm md:text-base font-black capitalize text-center mb-3">
                                     {pokemon.name}
                                 </h2>
-
-                                {/* Types Stacked in a Column */}
                                 <div className="flex flex-col gap-1.5 w-full items-center">
                                     {pokemon.types.map((typeInfo) => (
                                         <img
                                             key={typeInfo.type.name}
-                                            src={
-                                                typePokemon[typeInfo.type.name]
-                                            }
+                                            src={typePokemon[typeInfo.type.name]}
                                             alt={typeInfo.type.name}
                                             className="h-5 md:h-6 w-auto object-contain"
                                         />
