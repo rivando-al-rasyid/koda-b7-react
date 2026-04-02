@@ -1,10 +1,17 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReviewForm from "./components/ReviewForm";
 import ReviewList from "./components/ReviewList";
 import Footer from "./layout/Footer";
 
 function App() {
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState(() => {
+        const savedReviews = localStorage.getItem("reviewData");
+        return savedReviews ? JSON.parse(savedReviews) : [];
+    });
+    useEffect(() => {
+        localStorage.setItem("reviewData", JSON.stringify(reviews));
+    }, [reviews]);
+
     /**
      *
      * @param {Object} newReview
@@ -12,6 +19,7 @@ function App() {
      */
     const handleAddReview = (newReview) => {
         if (!newReview.comment || !newReview.username) return;
+
         const reviewWithMeta = {
             ...newReview,
             id: Date.now(),
@@ -20,7 +28,6 @@ function App() {
 
         setReviews((prevReviews) => [...prevReviews, reviewWithMeta]);
     };
-
     return (
         <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
             <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">

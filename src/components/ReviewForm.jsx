@@ -10,6 +10,7 @@ const ReviewForm = ({ onAddReview }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onAddReview(formData);
+
         // Reset form
         setFormData({ username: "", rating: 5, comment: "" });
     };
