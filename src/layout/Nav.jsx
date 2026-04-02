@@ -1,11 +1,41 @@
+import { NavLink } from "react-router";
+
+NavLink;
 export default function Nav() {
     return (
-        <nav className="bg-white border-2 border-zinc-900 rounded-2xl shadow-[4px_4px_0px_#18181b] overflow-hidden">
-            <div className="px-6 py-4 border-b-2 border-zinc-900 bg-zinc-900">
-                <h1 className="text-xl font-black tracking-tight text-white uppercase">
-                    Vando
-                </h1>
-            </div>
+        <nav className="flex flex-row  bg-white border-2 border-zinc-900 rounded-2xl overflow-hidden">
+            <NavLink
+                className={({ isActive }) =>
+                    `px-3 py-1 rounded ${isActive ? "bg-zinc-900 text-white" : "text-zinc-900"}`
+                }
+                to="/"
+            >
+                Home
+            </NavLink>
+            <NavLink
+                className={({ isActive }) =>
+                    `px-3 py-1 rounded ${isActive ? "bg-zinc-900 text-white" : "text-zinc-900"}`
+                }
+                to="/counter"
+            >
+                Counter
+            </NavLink>
+            <NavLink
+                className={({ isActive }) =>
+                    `px-3 py-1 rounded ${isActive ? "bg-zinc-900 text-white" : "text-zinc-900"}`
+                }
+                to="/product"
+            >
+                Product
+            </NavLink>
+            <NavLink
+                className={({ isActive }) =>
+                    `px-3 py-1 rounded ${isActive ? "bg-zinc-900 text-white" : "text-zinc-900"}`
+                }
+                to="/pokemon"
+            >
+                Pokemon
+            </NavLink>
         </nav>
     );
 }

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import PokemonCard from "../components/PokemonCard";
 export default function Pokemon() {
     const [pokemons, setPokemons] = useState([]);
@@ -21,5 +22,10 @@ export default function Pokemon() {
         })();
     }, []);
 
-    return <PokemonCard pokemons={pokemons} />;
+    return (
+        <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
+            {/* Pokemon */}
+            <PokemonCard pokemons={pokemons} />
+        </main>
+    );
 }
