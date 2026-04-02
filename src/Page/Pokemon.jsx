@@ -24,10 +24,10 @@ export default function Pokemon() {
     }, []);
 
     return (
-        <div className="page">
-            <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
+        <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
+            <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">
                 <PokemonCard pokemons={pokemons} />
-            </main>
-        </div>
+            </section>
+        </main>
     );
 }
