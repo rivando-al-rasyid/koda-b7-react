@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/pokemon" element={<Pokemon />} />
                 <Route path="/ricknmorty">
                     <Route index element={<CharList />} />
-                    <Route path=":id" element={<CharDetail />} />
+                    <Route path=":id/:slug" element={<CharDetail />} />
                 </Route>
             </Routes>
         </BrowserRouter>

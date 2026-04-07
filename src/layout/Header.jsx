@@ -40,6 +40,11 @@ const Header = () => {
                                 Products
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/ricknmorty" className={navLinkStyles}>
+                                Rick & Morty
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
 
