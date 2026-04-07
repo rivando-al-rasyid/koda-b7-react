@@ -29,7 +29,7 @@ export default function CharDetail() {
             <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">
                 <div className="px-6 py-4 border-b-4 border-zinc-900 bg-zinc-900 flex items-center gap-4">
                     <Link
-                        to="/ricknmorty"
+                        to="/characters"
                         className="text-white text-sm font-bold hover:underline"
                     >
                         ← Back

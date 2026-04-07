@@ -41,7 +41,7 @@ const Header = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/ricknmorty" className={navLinkStyles}>
+                            <NavLink to="/characters" className={navLinkStyles}>
                                 Rick & Morty
                             </NavLink>
                         </li>

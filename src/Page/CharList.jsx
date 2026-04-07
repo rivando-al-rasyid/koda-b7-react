@@ -36,7 +36,7 @@ export default function CharList() {
                     {characters.map((char) => (
                         <Link
                             key={char.id}
-                            to={`/ricknmorty/${char.id}/${slugify(char.name, {
+                            to={`/characters/${char.id}/${slugify(char.name, {
                                 lower: true,
                                 strict: true,
                             })}`}

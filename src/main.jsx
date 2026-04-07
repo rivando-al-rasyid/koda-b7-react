@@ -20,7 +20,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/counter" element={<Counter />} />
                 <Route path="/product" element={<Product />} />
                 <Route path="/pokemon" element={<Pokemon />} />
-                <Route path="/ricknmorty">
+                <Route path="/characters">
                     <Route index element={<CharList />} />
                     <Route path=":id/:slug" element={<CharDetail />} />
                 </Route>
