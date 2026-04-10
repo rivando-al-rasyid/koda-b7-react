@@ -17,7 +17,7 @@ export default function CharDetail() {
                 const data = await response.json();
                 setCharacter(data);
             } catch (error) {
-                setError("Failed to fetch character data: " + error.message);
+                setError(`Failed to fetch character data: ${error.message}`);
             } finally {
                 setLoading(false);
             }
