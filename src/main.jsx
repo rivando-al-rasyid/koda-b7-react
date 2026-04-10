@@ -5,11 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import "./globals.css";
 import App from "./App.jsx";
 import Headers from "./layout/Header.jsx";
-import Counter from "./Page/Counter.jsx";
-import Product from "./Page/Product.jsx";
-import Pokemon from "./Page/Pokemon.jsx";
-import CharList from "./Page/CharList.jsx";
-import CharDetail from "./Page/ChartDetail.jsx";
+import Counter from "./page/Counter.jsx";
+import Product from "./page/Product.jsx";
+import Pokemon from "./page/Pokemon.jsx";
+import CharList from "./page/CharList.jsx";
+import CharDetail from "./Page/CharDetail.jsx";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
