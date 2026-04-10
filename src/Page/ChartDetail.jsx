@@ -16,8 +16,8 @@ export default function CharDetail() {
                 if (!response.ok) throw new Error("Character not found");
                 const data = await response.json();
                 setCharacter(data);
-            } catch (err) {
-                setError(err.message);
+            } catch (error) {
+                setError("Failed to fetch character data: " + error.message);
             } finally {
                 setLoading(false);
             }
