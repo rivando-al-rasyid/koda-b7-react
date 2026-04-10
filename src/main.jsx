@@ -10,11 +10,14 @@ import Product from "./page/Product.jsx";
 import Pokemon from "./page/Pokemon.jsx";
 import CharList from "./page/CharList.jsx";
 import CharDetail from "./Page/CharDetail.jsx";
+import UserProvider from "./context/user/Provider.jsx";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <BrowserRouter>
-            <Headers />
+            <UserProvider>
+                <Headers />
+            </UserProvider>
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/counter" element={<Counter />} />
