@@ -6,7 +6,7 @@ import useFetch from "../utils/useFetch";
 export default function Pokemon() {
     const [pokemons, setPokemons] = useState([]);
     const { data, loading, error } = useFetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=151",
+        "https://pokeapi.co/api/v2/pokemon?limit=20",
     );
     useEffect(() => {
         (async () => {
