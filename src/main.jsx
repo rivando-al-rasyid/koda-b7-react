@@ -8,7 +8,7 @@ import Headers from "./layout/Header.jsx";
 import Counter from "./Page/Counter.jsx";
 import Product from "./Page/Product.jsx";
 import Pokemon from "./Page/Pokemon.jsx";
-import CharList from "./Page/CharList.jsx";
+import CharListUsefetch from "./Page/CharListUsefetch.jsx";
 import CharDetail from "./Page/ChartDetail.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/product" element={<Product />} />
                 <Route path="/pokemon" element={<Pokemon />} />
                 <Route path="/characters">
-                    <Route index element={<CharList />} />
+                    <Route index element={<CharListUsefetch />} />
                     <Route path=":id/:slug" element={<CharDetail />} />
                 </Route>
             </Routes>
