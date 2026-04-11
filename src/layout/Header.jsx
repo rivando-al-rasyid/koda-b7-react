@@ -3,10 +3,21 @@ import { NavLink, useNavigate } from "react-router";
 import UserContext from "../context/user/context";
 
 const Header = () => {
+    /**
+     * Description placeholder
+     *
+     * @type {object} user - The current user's information, including username and profile picture URL.
+     */
     const { isLogin, setIsLogin, user } = useContext(UserContext);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const navigate = useNavigate();
 
+    /**
+     * Description placeholder
+     *
+     * @param {object} props
+     * @param {boolean} props.isActive
+     */
     const navLinkStyles = ({ isActive }) =>
         isActive
             ? "px-3 py-1 border-2 border-zinc-900 bg-amber-400 shadow-[2px_2px_0px_#18181b] transition-all"
@@ -64,8 +75,8 @@ const Header = () => {
                                     flex items-center gap-3 px-3 py-1.5
                                     border-[3px] border-black bg-yellow-400
                                     shadow-[4px_4px_0px_#000]
-                                    hover:bg-yellow-300 hover:shadow-[6px_6px_0px_#000] hover:-translate-x-[2px] hover:-translate-y-[2px]
-                                    active:shadow-none active:translate-x-[2px] active:translate-y-[2px]
+                                    hover:bg-yellow-300 hover:shadow-[6px_6px_0px_#000] hover:-translate-x-0.5 hover:-translate-y-0.5
+                                    active:shadow-none active:translate-x-0.5 active:translate-y-0.5
                                     transition-all duration-75 outline-none focus-visible:ring-2 focus-visible:ring-black
                                 "
                             >
@@ -100,7 +111,7 @@ const Header = () => {
                             </button>
 
                             {isDropdownOpen && (
-                                <ul className="absolute right-0 mt-2 w-[200px] bg-white border-[3px] border-black shadow-[8px_8px_0px_#000] z-50 overflow-hidden list-none">
+                                <ul className="absolute right-0 mt-2 w-50 bg-white border-[3px] border-black shadow-[8px_8px_0px_#000] z-50 overflow-hidden list-none">
                                     <li className="border-b-[3px] border-black">
                                         <NavLink
                                             to="/profile"

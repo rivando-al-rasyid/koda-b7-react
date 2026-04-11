@@ -1,14 +1,33 @@
 import { useState } from "react";
+import Button from "./Button";
 
+/**
+ * Komponen form untuk menangani input produk baru secara dinamis.
+ * * @param {Object} props - Properti komponen.
+ * @param {Function} props.onAddProduct - Fungsi callback yang dijalankan saat form dikirim.
+ * Menerima objek { id, productName }.
+ * @param {string} props.Name - Label dinamis untuk input (misal: "Product", "Item").
+ * @returns {JSX.Element} Elemen form yang ter-render.
+ */
 export default function ProductForm({ onAddProduct, Name }) {
     const [productName, setProductName] = useState("");
 
+    /**
+     * Mengelola pengiriman form, melakukan pembersihan data (trimming),
+     * dan mereset state input setelah data dikirim.
+     * * @param {React.FormEvent} e - Event submit dari form.
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Mencegah penambahan jika input hanya berisi spasi
+        if (!productName.trim()) return;
+
         onAddProduct({
-            id: Date.now(),
+            id: Date.now(), // ID unik berdasarkan timestamp
             productName: productName.trim(),
         });
+
         setProductName("");
     };
 
@@ -25,16 +44,14 @@ export default function ProductForm({ onAddProduct, Name }) {
                     </label>
                     <input
                         type="text"
+                        required
                         value={productName}
                         onChange={(e) => setProductName(e.target.value)}
                         placeholder="e.g. Wireless Headphones"
                         className="border-2 border-zinc-900 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 placeholder-zinc-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all"
                     />
                 </div>
-
-                <button className="mt-1 bg-zinc-900 text-white font-black uppercase tracking-widest text-sm py-3 rounded-xl hover:bg-amber-400 hover:text-zinc-900 active:scale-95 transition-all duration-150">
-                    Submit
-                </button>
+                <Button type="submit">Submit</Button>
             </form>
         </section>
     );
