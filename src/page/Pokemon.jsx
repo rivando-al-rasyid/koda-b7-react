@@ -9,6 +9,8 @@ export default function Pokemon() {
         "https://pokeapi.co/api/v2/pokemon?limit=20",
     );
     useEffect(() => {
+        if (!data || !data.results) return;
+
         (async () => {
             try {
                 const detailedPromises = data.results.map((pokemon) =>
@@ -21,7 +23,6 @@ export default function Pokemon() {
             }
         })();
     }, [data]);
-
     return (
         <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
             <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">
