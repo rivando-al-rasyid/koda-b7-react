@@ -10,16 +10,29 @@ function UserProvider({ children }) {
         return false;
     });
 
+    const [user, setUser] = useState(() => {
+        const saved = localStorage.getItem("user");
+        if (saved !== null) {
+            return JSON.parse(saved);
+        }
+        return {
+            username: "",
+            profilePic: "https://via.placeholder.com/150",
+        };
+    });
+
     useEffect(() => {
         localStorage.setItem("isLogin", JSON.stringify(isLogin));
     }, [isLogin]);
 
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(user));
+    }, [user]);
+
     return (
-        <div className="flex items-center gap-8">
-            <UserContext.Provider value={{ isLogin, setIsLogin }}>
-                {children}
-            </UserContext.Provider>
-        </div>
+        <UserContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
+            {children}
+        </UserContext.Provider>
     );
 }
 

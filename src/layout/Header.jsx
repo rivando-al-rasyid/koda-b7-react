@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router";
+import { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 import UserContext from "../context/user/context";
 
 const Header = () => {
-    const { isLogin, setIsLogin } = useContext(UserContext);
+    const { isLogin, setIsLogin, user } = useContext(UserContext);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const navigate = useNavigate();
 
     const navLinkStyles = ({ isActive }) =>
         isActive
@@ -53,35 +54,36 @@ const Header = () => {
                     {isLogin ? (
                         <div className="relative">
                             <button
-                                type="button" // Always specify button type to prevent form submission bugs
+                                type="button"
                                 aria-haspopup="true"
                                 aria-expanded={isDropdownOpen}
                                 onClick={() =>
                                     setIsDropdownOpen((prev) => !prev)
                                 }
                                 className="
-        flex items-center gap-3 px-3 py-1.5
-        border-[3px] border-black bg-yellow-400
-        shadow-[4px_4px_0px_#000]
-        hover:bg-yellow-300 hover:shadow-[6px_6px_0px_#000] hover:-translate-x-[2px] hover:-translate-y-[2px]
-        active:shadow-none active:translate-x-[2px] active:translate-y-[2px]
-        transition-all duration-75 outline-none focus-visible:ring-2 focus-visible:ring-black
-    "
+                                    flex items-center gap-3 px-3 py-1.5
+                                    border-[3px] border-black bg-yellow-400
+                                    shadow-[4px_4px_0px_#000]
+                                    hover:bg-yellow-300 hover:shadow-[6px_6px_0px_#000] hover:-translate-x-[2px] hover:-translate-y-[2px]
+                                    active:shadow-none active:translate-x-[2px] active:translate-y-[2px]
+                                    transition-all duration-75 outline-none focus-visible:ring-2 focus-visible:ring-black
+                                "
                             >
                                 <span className="font-bold text-black uppercase tracking-tight">
-                                    John Doe
+                                    {user?.username || "User"}
                                 </span>
 
                                 <div className="relative">
                                     <img
-                                        src="https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/50.jpg"
-                                        alt="John Doe's profile"
+                                        src={
+                                            user?.profilePic ||
+                                            "https://via.placeholder.com/150"
+                                        }
+                                        alt={`${user?.username}'s profile`}
                                         className="w-9 h-9 object-cover border-2 border-black block bg-white"
                                     />
-                                    {/* Optional: Status indicator dot could go here */}
                                 </div>
 
-                                {/* Chevron Icon - Signals to user that this is a dropdown */}
                                 <svg
                                     className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
                                     fill="none"
@@ -95,7 +97,8 @@ const Header = () => {
                                         d="M19 9l-7 7-7-7"
                                     />
                                 </svg>
-                            </button>{" "}
+                            </button>
+
                             {isDropdownOpen && (
                                 <ul className="absolute right-0 mt-2 w-[200px] bg-white border-[3px] border-black shadow-[8px_8px_0px_#000] z-50 overflow-hidden list-none">
                                     <li className="border-b-[3px] border-black">
@@ -114,6 +117,7 @@ const Header = () => {
                                             onClick={() => {
                                                 setIsLogin(false);
                                                 setIsDropdownOpen(false);
+                                                navigate("/login");
                                             }}
                                             className="w-full text-left px-4 py-3 hover:bg-red-500 transition-colors uppercase text-xs font-black tracking-wide text-red-600 hover:text-white"
                                         >
@@ -125,13 +129,13 @@ const Header = () => {
                         </div>
                     ) : (
                         <button
-                            onClick={() => setIsLogin(true)}
                             className="px-4 py-2 border-[3px] border-black bg-yellow-400 shadow-[4px_4px_0px_#000] font-black uppercase text-xs tracking-wide hover:bg-yellow-300 hover:shadow-[6px_6px_0px_#000] hover:-translate-x-px hover:-translate-y-px active:shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all duration-75 outline-none"
+                            onClick={() => navigate("/login")}
                         >
                             Login
                         </button>
                     )}
-                </div>{" "}
+                </div>
             </div>
         </header>
     );
