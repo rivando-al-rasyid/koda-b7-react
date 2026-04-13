@@ -1,4 +1,4 @@
-export default function ProductTable({ products }) {
+export default function ProductTable({ products, onDelete }) {
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         return date.toLocaleString("en-GB", {
@@ -37,8 +37,11 @@ export default function ProductTable({ products }) {
                                     <th className="text-left px-4 py-4 font-black uppercase tracking-widest">
                                         Product Name
                                     </th>
-                                    <th className="text-left px-4 py-4 font-black uppercase tracking-widest">
+                                    <th className="text-left px-4 py-4 font-black uppercase tracking-widest ">
                                         Created At
+                                    </th>
+                                    <th className="text-left px-4 py-4 font-black uppercase tracking-widest ">
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
@@ -60,6 +63,14 @@ export default function ProductTable({ products }) {
                                         </td>
                                         <td className="px-4 py-4 text-zinc-500 font-medium">
                                             {formatDate(p.id)}
+                                        </td>
+                                        <td>
+                                            <button
+                                                onClick={() => onDelete(p.id)}
+                                                className="cursor-pointer"
+                                            >
+                                                hapus
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
