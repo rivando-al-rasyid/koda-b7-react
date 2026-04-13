@@ -1,25 +1,16 @@
-import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct } from "../features/product/slice";
 import ProductForm from "../components/Form";
 import ProductTable from "../components/Table";
 import Footer from "../layout/Footer";
 
 export default function Product() {
-    // 1. Initialize state with a "Lazy Initializer" (Cleans up the double-useEffect flicker)
-    const [products, setProducts] = useState(() => {
-        const savedProducts = localStorage.getItem("productData");
-        return savedProducts ? JSON.parse(savedProducts) : [];
-    });
-
-    // 2. This effect runs every time 'products' changes
-    useEffect(() => {
-        localStorage.setItem("productData", JSON.stringify(products));
-    }, [products]);
+    const products = useSelector((state) => state.product.items);
+    const dispatch = useDispatch();
 
     const handleAddProduct = (product) => {
         if (product.productName === "") return;
-
-        // Using the functional update ensures you have the latest state
-        setProducts((prevProducts) => [...prevProducts, product]);
+        dispatch(addProduct(product));
     };
 
     return (
