@@ -59,6 +59,11 @@ const Header = () => {
                                 Characters
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/survei" className={navLinkStyles}>
+                                Survei
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
                 <div className="flex items-center gap-4">
