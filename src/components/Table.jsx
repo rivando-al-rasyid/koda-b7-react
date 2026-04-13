@@ -1,4 +1,4 @@
-export default function ProductTable({ products, onDelete }) {
+export default function ProductTable({ products, onDelete, onEdit }) {
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         return date.toLocaleString("en-GB", {
@@ -40,7 +40,10 @@ export default function ProductTable({ products, onDelete }) {
                                     <th className="text-left px-4 py-4 font-black uppercase tracking-widest ">
                                         Created At
                                     </th>
-                                    <th className="text-left px-4 py-4 font-black uppercase tracking-widest ">
+                                    <th
+                                        colSpan={2}
+                                        className="text-left px-4 py-4 font-black uppercase tracking-widest "
+                                    >
                                         Action
                                     </th>
                                 </tr>
@@ -64,10 +67,18 @@ export default function ProductTable({ products, onDelete }) {
                                         <td className="px-4 py-4 text-zinc-500 font-medium">
                                             {formatDate(p.id)}
                                         </td>
+                                        <td className="justify-around">
+                                            <button
+                                                onClick={() => onEdit(p.id)}
+                                                className="cursor-pointer text-blue-700"
+                                            >
+                                                edit
+                                            </button>
+                                        </td>
                                         <td>
                                             <button
                                                 onClick={() => onDelete(p.id)}
-                                                className="cursor-pointer"
+                                                className="cursor-pointer text-red-700"
                                             >
                                                 hapus
                                             </button>

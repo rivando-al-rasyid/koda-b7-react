@@ -1,19 +1,40 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct, removeProduct } from "../features/product/slice";
-import ProductForm from "../components/Form";
+import {
+    addProduct,
+    removeProduct,
+    editProduct,
+} from "../features/product/slice";
+import ProductForm from "../components/ProductForm";
 import ProductTable from "../components/Table";
 import Footer from "../layout/Footer";
 
 export default function Product() {
     const products = useSelector((state) => state.product.items);
     const dispatch = useDispatch();
+    const [editingProduct, setEditingProduct] = useState(null); // null = mode add
 
     const handleAddProduct = (product) => {
-        if (product.productName === "") return;
-        dispatch(addProduct(product));
+        if (editingProduct) {
+            // Mode edit
+            dispatch(
+                editProduct({
+                    id: editingProduct.id,
+                    productName: product.productName,
+                }),
+            );
+            setEditingProduct(null);
+        } else {
+            // Mode add
+            dispatch(addProduct(product));
+        }
     };
 
-    // The handler for removing a product
+    const handleEditProduct = (id) => {
+        const found = products.find((p) => p.id === id);
+        if (found) setEditingProduct(found);
+    };
+
     const handleDeleteProduct = (id) => {
         dispatch(removeProduct(id));
     };
@@ -26,11 +47,16 @@ export default function Product() {
                         📦 Product Manager
                     </h2>
                 </div>
-                <ProductForm onAddProduct={handleAddProduct} />
-
+                <ProductForm
+                    onAddProduct={handleAddProduct}
+                    editingProduct={editingProduct}
+                    onCancelEdit={() => setEditingProduct(null)}
+                    Name="Product"
+                />
                 <ProductTable
                     products={products}
                     onDelete={handleDeleteProduct}
+                    onEdit={handleEditProduct}
                 />
             </section>
             <Footer />

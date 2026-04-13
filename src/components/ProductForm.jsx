@@ -1,42 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 
-/**
- * Komponen form untuk menangani input produk baru secara dinamis.
- * * @param {Object} props - Properti komponen.
- * @param {Function} props.onAddProduct - Fungsi callback yang dijalankan saat form dikirim.
- * Menerima objek { id, productName }.
- * @param {string} props.Name - Label dinamis untuk input (misal: "Product", "Item").
- * @returns {JSX.Element} Elemen form yang ter-render.
- */
-export default function ProductForm({ onAddProduct, Name }) {
+export default function ProductForm({
+    onAddProduct,
+    editingProduct,
+    onCancelEdit,
+    Name,
+}) {
     const [productName, setProductName] = useState("");
 
-    /**
-     * Mengelola pengiriman form, melakukan pembersihan data (trimming),
-     * dan mereset state input setelah data dikirim.
-     * * @param {React.FormEvent} e - Event submit dari form.
-     */
+    // Sync input ke data produk yang sedang diedit
+    useEffect(() => {
+        if (editingProduct) {
+            setProductName(editingProduct.productName);
+        } else {
+            setProductName("");
+        }
+    }, [editingProduct]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Mencegah penambahan jika input hanya berisi spasi
         if (!productName.trim()) return;
-
         onAddProduct({
-            id: Date.now(), // ID unik berdasarkan timestamp
+            id: Date.now(),
             productName: productName.trim(),
         });
-
         setProductName("");
     };
+
+    const isEditing = !!editingProduct;
 
     return (
         <section className="p-6">
             <h2 className="text-xl font-black tracking-tight text-zinc-900 mb-5 uppercase">
-                ＋ Add {Name}
+                {isEditing ? "✏️ Edit" : "＋ Add"} {Name}
             </h2>
-
+            <p>
+                Press Enter To {isEditing ? "Edit" : "Add"} {Name}
+            </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
                     <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
@@ -51,7 +52,20 @@ export default function ProductForm({ onAddProduct, Name }) {
                         className="border-2 border-zinc-900 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 placeholder-zinc-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all"
                     />
                 </div>
-                <Button type="submit">Submit</Button>
+                <div className="flex gap-3">
+                    <Button type="submit">
+                        {isEditing ? "Update" : "Submit"}
+                    </Button>
+                    {isEditing && (
+                        <button
+                            type="button"
+                            onClick={onCancelEdit}
+                            className="text-sm font-bold text-zinc-500 underline underline-offset-2 hover:text-zinc-800 transition-colors"
+                        >
+                            Cancel
+                        </button>
+                    )}
+                </div>
             </form>
         </section>
     );

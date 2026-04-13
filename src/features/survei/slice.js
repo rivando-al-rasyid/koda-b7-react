@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export /**
  * Description placeholder
@@ -6,16 +6,21 @@ export /**
  * @type {array}
  */
 const surveiSlice = createSlice({
-  name: 'survei',
-  initialState: {
-    items: []
-  },
-  reducers: {
-    addSurvei: (state, action) => {
-      state.items.push(action.payload);
+    name: "survei",
+    initialState: {
+        items: [],
     },
-  },
-})
+    reducers: {
+        addSurvei: (state, action) => {
+            state.items.push(action.payload);
+        },
+        removeSurvei: (state, action) => {
+            state.items = state.items.filter(
+                (item) => item.id !== action.payload,
+            );
+        },
+    },
+});
 
-export const { addSurvei } = surveiSlice.actions
-export default surveiSlice.reducer
+export const { addSurvei, removeSurvei } = surveiSlice.actions;
+export default surveiSlice.reducer;
