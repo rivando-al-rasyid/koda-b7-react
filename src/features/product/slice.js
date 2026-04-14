@@ -10,7 +10,7 @@ const productSlice = createSlice({
     },
     reducers: {
         addProduct: (state, action) => {
-            state.items.unshift(action.payload);
+            state.items.push(action.payload);
         },
         editProduct: (state, action) => {
             const index = state.items.findIndex((item) => item.id === action.payload.id);
