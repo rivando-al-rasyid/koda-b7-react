@@ -1,72 +1,81 @@
-import { useState, useEffect } from "react";
-import Button from "./Button";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ProductForm from "../components/ProductForm";
+import ProductTable from "../components/ProductTable";
+import {
+    addProduct,
+    editProduct,
+    removeProduct,
+} from "../features/product/slice";
+import { fetchProducts } from "../features/product/action";
 
-export default function ProductForm({
-    onAddProduct,
-    editingProduct,
-    onCancelEdit,
-    Name,
-}) {
-    const [productName, setProductName] = useState("");
+export default function Product() {
+    const dispatch = useDispatch();
 
-    // Sync input ke data produk yang sedang diedit
+    const products = useSelector((state) => state.product.items);
+    const loading = useSelector((state) => state.product.loading);
+    const error = useSelector((state) => state.product.error);
+
+    const [editingId, setEditingId] = useState(null);
+
     useEffect(() => {
-        if (editingProduct) {
-            setProductName(editingProduct.productName);
-        } else {
-            setProductName("");
-        }
-    }, [editingProduct]);
+        dispatch(fetchProducts());
+    }, [dispatch]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!productName.trim()) return;
-        onAddProduct({
-            id: Date.now(),
-            productName: productName.trim(),
-        });
-        setProductName("");
+    const editingProduct = useMemo(() => {
+        return products.find((item) => item.id === editingId) || null;
+    }, [products, editingId]);
+
+    const handleAddOrUpdateProduct = (formData) => {
+        if (editingProduct) {
+            dispatch(
+                editProduct({
+                    ...editingProduct,
+                    ...formData,
+                }),
+            );
+            setEditingId(null);
+            return;
+        }
+
+        dispatch(
+            addProduct({
+                id: Date.now(),
+                productName: formData.productName,
+                createdAt: new Date().toISOString(),
+            }),
+        );
     };
 
-    const isEditing = !!editingProduct;
+    const handleDeleteProduct = (id) => {
+        dispatch(removeProduct(id));
+        if (editingId === id) setEditingId(null);
+    };
+
+    const handleEditProduct = (id) => {
+        setEditingId(id);
+    };
+
+    const handleCancelEdit = () => {
+        setEditingId(null);
+    };
 
     return (
-        <section className="p-6">
-            <h2 className="text-xl font-black tracking-tight text-zinc-900 mb-5 uppercase">
-                {isEditing ? "✏️ Edit" : "＋ Add"} {Name}
-            </h2>
-            <p>
-                Press Enter To {isEditing ? "Edit" : "Add"} {Name}
-            </p>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
-                        {Name} Name
-                    </label>
-                    <input
-                        type="text"
-                        required
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        placeholder="e.g. Wireless Headphones"
-                        className="border-2 border-zinc-900 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 placeholder-zinc-300 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all"
-                    />
-                </div>
-                <div className="flex gap-3">
-                    <Button type="submit">
-                        {isEditing ? "Update" : "Submit"}
-                    </Button>
-                    {isEditing && (
-                        <button
-                            type="button"
-                            onClick={onCancelEdit}
-                            className="text-sm font-bold text-zinc-500 underline underline-offset-2 hover:text-zinc-800 transition-colors"
-                        >
-                            Cancel
-                        </button>
-                    )}
-                </div>
-            </form>
-        </section>
+        <div className="space-y-6">
+            <ProductForm
+                onAddProduct={handleAddOrUpdateProduct}
+                editingProduct={editingProduct}
+                onCancelEdit={handleCancelEdit}
+            />
+
+            {loading && <p>Loading products...</p>}
+            {error && <p>{error}</p>}
+
+            <ProductTable
+                products={products || []}
+                onDelete={handleDeleteProduct}
+                onEdit={handleEditProduct}
+            />
+        </div>
     );
 }

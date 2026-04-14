@@ -1,65 +1,81 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ProductForm from "../components/ProductForm";
+import ProductTable from "../components/ProductTable";
 import {
     addProduct,
-    removeProduct,
     editProduct,
+    removeProduct,
 } from "../features/product/slice";
-import ProductForm from "../components/ProductForm";
-import ProductTable from "../components/Table";
-import Footer from "../layout/Footer";
+import { fetchProducts } from "../features/product/action";
 
 export default function Product() {
-    const products = useSelector((state) => state.product.items);
     const dispatch = useDispatch();
-    const [editingProduct, setEditingProduct] = useState(null); // null = mode add
 
-    const handleAddProduct = (product) => {
+    const products = useSelector((state) => state.product.items);
+    const loading = useSelector((state) => state.product.loading);
+    const error = useSelector((state) => state.product.error);
+
+    const [editingId, setEditingId] = useState(null);
+
+    useEffect(() => {
+        dispatch(fetchProducts());
+    }, [dispatch]);
+
+    const editingProduct = useMemo(() => {
+        return products.find((item) => item.id === editingId) || null;
+    }, [products, editingId]);
+
+    const handleAddOrUpdateProduct = (formData) => {
         if (editingProduct) {
-            // Mode edit
             dispatch(
                 editProduct({
-                    id: editingProduct.id,
-                    productName: product.productName,
+                    ...editingProduct,
+                    ...formData,
                 }),
             );
-            setEditingProduct(null);
-        } else {
-            // Mode add
-            dispatch(addProduct(product));
+            setEditingId(null);
+            return;
         }
-    };
 
-    const handleEditProduct = (id) => {
-        const found = products.find((p) => p.id === id);
-        if (found) setEditingProduct(found);
+        dispatch(
+            addProduct({
+                id: Date.now(),
+                productName: formData.productName,
+                createdAt: new Date().toISOString(),
+            }),
+        );
     };
 
     const handleDeleteProduct = (id) => {
         dispatch(removeProduct(id));
+        if (editingId === id) setEditingId(null);
+    };
+
+    const handleEditProduct = (id) => {
+        setEditingId(id);
+    };
+
+    const handleCancelEdit = () => {
+        setEditingId(null);
     };
 
     return (
-        <main className="mx-auto max-w-4xl flex flex-col gap-6 min-h-screen px-4 py-12">
-            <section className="bg-white border-4 border-zinc-900 rounded-2xl overflow-hidden">
-                <div className="px-6 py-4 border-b-4 border-zinc-900 bg-zinc-900">
-                    <h2 className="text-xl font-black tracking-tight text-white uppercase">
-                        📦 Product Manager
-                    </h2>
-                </div>
-                <ProductForm
-                    onAddProduct={handleAddProduct}
-                    editingProduct={editingProduct}
-                    onCancelEdit={() => setEditingProduct(null)}
-                    Name="Product"
-                />
-                <ProductTable
-                    products={products}
-                    onDelete={handleDeleteProduct}
-                    onEdit={handleEditProduct}
-                />
-            </section>
-            <Footer />
-        </main>
+        <div className="space-y-6">
+            <ProductForm
+                onAddProduct={handleAddOrUpdateProduct}
+                editingProduct={editingProduct}
+                onCancelEdit={handleCancelEdit}
+            />
+
+            {loading && <p>Loading products...</p>}
+            {error && <p>{error}</p>}
+
+            <ProductTable
+                products={products || []}
+                onDelete={handleDeleteProduct}
+                onEdit={handleEditProduct}
+            />
+        </div>
     );
 }
