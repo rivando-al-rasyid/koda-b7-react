@@ -23,7 +23,7 @@ const storage = {
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["survei"],
+    whitelist: ["survei", "product"],
 };
 
 const rootReducer = combineReducers({

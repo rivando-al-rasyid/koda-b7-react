@@ -19,7 +19,9 @@ export default function Product() {
     const [editingId, setEditingId] = useState(null);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        if (products.length === 0) {
+            dispatch(fetchProducts());
+        }
     }, [dispatch]);
 
     const editingProduct = products.find((p) => p.id === editingId) ?? null;
