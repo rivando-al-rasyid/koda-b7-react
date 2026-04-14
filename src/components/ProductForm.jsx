@@ -1,81 +1,40 @@
-import { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ProductForm from "../components/ProductForm";
-import ProductTable from "../components/ProductTable";
-import {
-    addProduct,
-    editProduct,
-    removeProduct,
-} from "../features/product/slice";
-import { fetchProducts } from "../features/product/action";
+import { useEffect, useState } from "react";
 
-export default function Product() {
-    const dispatch = useDispatch();
-
-    const products = useSelector((state) => state.product.items);
-    const loading = useSelector((state) => state.product.loading);
-    const error = useSelector((state) => state.product.error);
-
-    const [editingId, setEditingId] = useState(null);
+export default function ProductForm({ onSubmit, editingProduct, onCancelEdit }) {
+    const [productName, setProductName] = useState("");
 
     useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
-
-    const editingProduct = useMemo(() => {
-        return products.find((item) => item.id === editingId) || null;
-    }, [products, editingId]);
-
-    const handleAddOrUpdateProduct = (formData) => {
-        if (editingProduct) {
-            dispatch(
-                editProduct({
-                    ...editingProduct,
-                    ...formData,
-                }),
-            );
-            setEditingId(null);
-            return;
-        }
-
-        dispatch(
-            addProduct({
-                id: Date.now(),
-                productName: formData.productName,
-                createdAt: new Date().toISOString(),
-            }),
+        setProductName(
+            editingProduct
+                ? (editingProduct.productName ?? editingProduct.title ?? "")
+                : ""
         );
-    };
+    }, [editingProduct]);
 
-    const handleDeleteProduct = (id) => {
-        dispatch(removeProduct(id));
-        if (editingId === id) setEditingId(null);
-    };
-
-    const handleEditProduct = (id) => {
-        setEditingId(id);
-    };
-
-    const handleCancelEdit = () => {
-        setEditingId(null);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!productName.trim()) return;
+        onSubmit({ productName: productName.trim() });
+        if (!editingProduct) setProductName("");
     };
 
     return (
-        <div className="space-y-6">
-            <ProductForm
-                onAddProduct={handleAddOrUpdateProduct}
-                editingProduct={editingProduct}
-                onCancelEdit={handleCancelEdit}
+        <form onSubmit={handleSubmit} className="flex gap-2">
+            <input
+                type="text"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                placeholder="Product name..."
+                className="border-2 border-zinc-900 rounded px-3 py-2 flex-1"
             />
-
-            {loading && <p>Loading products...</p>}
-            {error && <p>{error}</p>}
-
-            <ProductTable
-                products={products || []}
-                onDelete={handleDeleteProduct}
-                onEdit={handleEditProduct}
-            />
-        </div>
+            <button type="submit" className="bg-zinc-900 text-white px-4 py-2 rounded font-bold">
+                {editingProduct ? "Update" : "Add"}
+            </button>
+            {editingProduct && (
+                <button type="button" onClick={onCancelEdit} className="border-2 border-zinc-900 px-4 py-2 rounded font-bold">
+                    Cancel
+                </button>
+            )}
+        </form>
     );
 }

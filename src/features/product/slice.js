@@ -13,15 +13,11 @@ const productSlice = createSlice({
             state.items.unshift(action.payload);
         },
         editProduct: (state, action) => {
-            const item = state.items.find(
-                (item) => item.id === action.payload.id,
-            );
-            if (item) Object.assign(item, action.payload);
+            const index = state.items.findIndex((item) => item.id === action.payload.id);
+            if (index !== -1) state.items[index] = action.payload;
         },
         removeProduct: (state, action) => {
-            state.items = state.items.filter(
-                (item) => item.id !== action.payload,
-            );
+            state.items = state.items.filter((item) => item.id !== action.payload);
         },
     },
     extraReducers: (builder) => {
